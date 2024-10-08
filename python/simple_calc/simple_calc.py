@@ -75,9 +75,19 @@ operators = {
     "+" : operator.add,
     "-" : operator.sub,
     "*" : operator.mul,
-    "/" : operator.truediv
+    "/" : operator.truediv,
+    ">>": operator.rshift,
+    "<<": operator.lshift,
+    "%" : operator.mod,   
+    "**": operator.pow
 }
 
+
+# support for Python 2 and 3
+try:
+    input = raw_input
+except NameError:
+    pass
 
 
 # ------------------------------------------------------------------------
@@ -95,7 +105,11 @@ def get_user_input():
         # NOTE - fill out the contents.  This pass statement should be removed    
         number1  = float(input("Input first number: "))
         number2  = float(input("Input second number: "))
-        function = input("Input function (+, -, *, /): ")
+        function = input("Input function (+, -, *, /, >>, <<, %, **): ")
+        
+        if function in ["<<", ">>"]:
+            number1 = int(number1)
+            number2 = int(number2)
         
         func = operators[function]
         
